@@ -1,3 +1,4 @@
+import services.HRRN.HighestResponseRatioNext;
 import services.RR.RoundRobinService;
 import services.SRTF.ShortestRemainingTimeFirst;
 
@@ -13,6 +14,8 @@ public class Main {
             RoundRobinService.runRoundRobin();
         if (coice ==2)
             ShortestRemainingTimeFirst.runSRTF();
+        if (coice==3)
+            HighestResponseRatioNext.runHRRN();
     }
 
 
