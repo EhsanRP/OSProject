@@ -52,9 +52,10 @@ public class HighestResponseRatioNext {
         }
 
         sortByArrival();
-        System.out.print("\nName\tArrival Time\tBurst Time\tWaiting Time");
-        System.out.print("\tTurnAround Time\t Normalized TT");
 
+        t=0;
+        System.out.println();
+        System.out.printf("t=" +t + "\t");
         for (t = p[0].at; t < sum_bt; ) {
 
             // Set lower limit to response ratio
@@ -85,7 +86,9 @@ public class HighestResponseRatioNext {
                 }
             }
             // Updating time value
+            System.out.printf(String.valueOf(p[loc].name) + "\t");
             t += p[loc].bt;
+            System.out.printf("t=" +t  + "\t");
 
             // Calculation of waiting time
             p[loc].wt = t - p[loc].at - p[loc].bt;
@@ -104,9 +107,9 @@ public class HighestResponseRatioNext {
 
             // Sum Waiting Time for average
             avgwt += p[loc].wt;
-            System.out.print("\n " + p[loc].name + "\t\t" + p[loc].at + "\t\t");
-            System.out.print(p[loc].bt+"\t\t" + p[loc].wt +"\t\t");
-            System.out.print(p[loc].tt +"\t\t" + p[loc].ntt);
+//            System.out.print("\n " + p[loc].name + "\t\t" + p[loc].at + "\t\t");
+//            System.out.print(p[loc].bt+"\t\t" + p[loc].wt +"\t\t");
+//            System.out.print(p[loc].tt +"\t\t" + p[loc].ntt);
         }
         System.out.println("\nAverage waiting time:" + avgwt / n);
         System.out.println("Average Turn Around time:" + avgtt / n);

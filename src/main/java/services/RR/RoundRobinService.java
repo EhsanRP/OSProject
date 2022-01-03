@@ -45,15 +45,16 @@ public class RoundRobinService {
             arrival[i] = Integer.parseInt(arrivalString[i]);
 
         tq = Integer.parseInt(inp.nextLine());
-
-        for (int i = 0; i < n; i++) {    //Initializing the queue and complete array
+        System.out.println();
+        System.out.printf("t=" +timer + "\t");
+        for (int i = 0; i < n; i++) {
             complete[i] = false;
             queue[i] = 0;
         }
-        while (timer < arrival[0])    //Incrementing Timer until the first process arrives
+        while (timer < arrival[0])
             timer++;
         queue[0] = 1;
-
+        System.out.printf("t=" +timer + "\t");
         while (true) {
             boolean flag = true;
             for (int i = 0; i < n; i++) {
@@ -68,19 +69,21 @@ public class RoundRobinService {
             for (int i = 0; (i < n) && (queue[i] != 0); i++) {
                 int ctr = 0;
                 while ((ctr < tq) && (temp_burst[queue[0] - 1] > 0)) {
+                    System.out.printf("process "+i + "\t");
                     temp_burst[queue[0] - 1] -= 1;
                     timer += 1;
                     ctr++;
+                    System.out.printf("t=" +timer + "\t");
 
-                    //Updating the ready queue until all the processes arrive
                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
                 }
                 if ((temp_burst[queue[0] - 1] == 0) && (complete[queue[0] - 1] == false)) {
-                    turn[queue[0] - 1] = timer;        //turn currently stores exit times
+
+                    turn[queue[0] - 1] = timer;
                     complete[queue[0] - 1] = true;
+
                 }
 
-                //checks whether or not CPU is idle
                 boolean idle = true;
                 if (queue[n - 1] == 0) {
                     for (int k = 0; k < n && queue[k] != 0; k++) {
@@ -92,11 +95,12 @@ public class RoundRobinService {
                     idle = false;
 
                 if (idle) {
+                    System.out.printf("t=" +timer + "\t");
+
                     timer++;
                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
                 }
 
-                //Maintaining the entries of processes after each premption in the ready Queue
                 queueMaintainence(queue, n);
             }
         }
@@ -106,12 +110,6 @@ public class RoundRobinService {
             wait[i] = turn[i] - burst[i];
         }
 
-        System.out.print("\nProgram No.\tArrival Time\tBurst Time\tWait Time\tTurnAround Time"
-                + "\n");
-        for (int i = 0; i < n; i++) {
-            System.out.print(i + 1 + "\t\t" + arrival[i] + "\t\t" + burst[i]
-                    + "\t\t" + wait[i] + "\t\t" + turn[i] + "\n");
-        }
         for (int i = 0; i < n; i++) {
             avgWait += wait[i];
             avgTT += turn[i];
