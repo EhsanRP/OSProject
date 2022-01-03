@@ -20,4 +20,4 @@ This project uses a hardcoded file path in the root folder. This file is named "
 		All algorithms print gant chart.
 		All algorithms pring avrages except MFQS.
 
-Special thanks to master Iren Mazloom Zadeh for teaching me Java in second term of my university.
+Special thanks to master Iren Mazloom Zadeh for teaching me Java in second term of my university. Due to her inspiration, I'm now a spring boot developer.
