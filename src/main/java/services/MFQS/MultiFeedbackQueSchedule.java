@@ -7,10 +7,9 @@ import java.util.Scanner;
 public class MultiFeedbackQueSchedule {
 
     static int n;
+    static MFQSProcess[] Q1, Q2, Q3 = new MFQSProcess[10];
     private static File file = new File("filename.txt");
     private static Scanner inp;
-
-    static MFQSProcess[] Q1, Q2, Q3 = new MFQSProcess[10];
 
     static {
         try {
@@ -48,7 +47,7 @@ public class MultiFeedbackQueSchedule {
             process.name = c;
             process.setAT(arrival[i]);
             process.setBT(burst[i]);
-            Q1[i].RT = Q1[i].BT;/*save burst time in remaining time for each process*/
+            Q1[i].RT = Q1[i].BT;
 
         }
         sortByArrival();
@@ -58,18 +57,18 @@ public class MultiFeedbackQueSchedule {
 
             if (Q1[i].RT <= tq1) {
 
-                System.out.printf("t=" +time + "\t");
+                System.out.printf("t=" + time + "\t");
 
-                time += Q1[i].RT;/*from arrival time of first process to completion of this process*/
+                time += Q1[i].RT;
                 Q1[i].RT = 0;
-                Q1[i].WT = time - Q1[i].AT - Q1[i].BT;/*amount of time process has been waiting in the first queue*/
-                Q1[i].TAT = time - Q1[i].AT;/*amount of time to execute the process*/
+                Q1[i].WT = time - Q1[i].AT - Q1[i].BT;
+                Q1[i].TAT = time - Q1[i].AT;
 
-                System.out.printf("process "+Q1[i].name + "\t");
+                System.out.printf("process " + Q1[i].name + "\t");
 
-            } else/*process moves to queue 2 with qt=8*/ {
+            } else {
 
-                System.out.printf("t=" +time + "\t");
+                System.out.printf("t=" + time + "\t");
 
                 Q2[k].WT = time;
                 time += tq1;
@@ -80,25 +79,25 @@ public class MultiFeedbackQueSchedule {
                 k = k + 1;
                 flag = 1;
 
-                System.out.printf("process "+Q1[i].name + "\t");
+                System.out.printf("process " + Q1[i].name + "\t");
 
             }
         }
         for (i = 0; i < k; i++) {
             if (Q2[i].RT <= tq2) {
-                System.out.printf("t=" +time + "\t");
+                System.out.printf("t=" + time + "\t");
 
-                time += Q2[i].RT;/*from arrival time of first process +BT of this process*/
+                time += Q2[i].RT;
                 Q2[i].RT = 0;
-                Q2[i].WT = time - tq1 - Q2[i].BT;/*amount of time process has been waiting in the ready queue*/
-                Q2[i].TAT = time - Q2[i].AT;/*amount of time to execute the process*/
+                Q2[i].WT = time - tq1 - Q2[i].BT;
+                Q2[i].TAT = time - Q2[i].AT;
 
-                System.out.printf("process "+Q1[i].name + "\t");
+                System.out.printf("process " + Q1[i].name + "\t");
 
 
-            } else/*process moves to queue 3 with FCFS*/ {
+            } else {
 
-                System.out.printf("t=" +time + "\t");
+                System.out.printf("t=" + time + "\t");
 
                 Q3[r].AT = time;
                 time += tq2;
@@ -109,7 +108,7 @@ public class MultiFeedbackQueSchedule {
                 r = r + 1;
                 flag = 2;
 
-                System.out.printf("process "+Q1[i].name + "\t");
+                System.out.printf("process " + Q1[i].name + "\t");
 
             }
         }

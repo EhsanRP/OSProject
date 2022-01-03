@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class MFQSProcess {
     char name;
-    int AT,BT,WT,TAT,RT,CT;
+    int AT, BT, WT, TAT, RT, CT;
 }

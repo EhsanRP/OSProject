@@ -2,7 +2,6 @@ package services.RR;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class RoundRobinService {
@@ -46,7 +45,7 @@ public class RoundRobinService {
 
         tq = Integer.parseInt(inp.nextLine());
         System.out.println();
-        System.out.printf("t=" +timer + "\t");
+        System.out.printf("t=" + timer + "\t");
         for (int i = 0; i < n; i++) {
             complete[i] = false;
             queue[i] = 0;
@@ -54,7 +53,7 @@ public class RoundRobinService {
         while (timer < arrival[0])
             timer++;
         queue[0] = 1;
-        System.out.printf("t=" +timer + "\t");
+        System.out.printf("t=" + timer + "\t");
         while (true) {
             boolean flag = true;
             for (int i = 0; i < n; i++) {
@@ -69,11 +68,11 @@ public class RoundRobinService {
             for (int i = 0; (i < n) && (queue[i] != 0); i++) {
                 int ctr = 0;
                 while ((ctr < tq) && (temp_burst[queue[0] - 1] > 0)) {
-                    System.out.printf("process "+i + "\t");
+                    System.out.printf("process " + i + "\t");
                     temp_burst[queue[0] - 1] -= 1;
                     timer += 1;
                     ctr++;
-                    System.out.printf("t=" +timer + "\t");
+                    System.out.printf("t=" + timer + "\t");
 
                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
                 }
@@ -95,7 +94,7 @@ public class RoundRobinService {
                     idle = false;
 
                 if (idle) {
-                    System.out.printf("t=" +timer + "\t");
+                    System.out.printf("t=" + timer + "\t");
 
                     timer++;
                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);

@@ -2,7 +2,6 @@ package services.SRTF;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ShortestRemainingTimeFirst {
@@ -18,7 +17,7 @@ public class ShortestRemainingTimeFirst {
         }
     }
 
-    public static void runSRTF(){
+    public static void runSRTF() {
 
         var n = Integer.parseInt(inp.nextLine());
         var burstString = inp.nextLine().split(", ");
@@ -39,8 +38,7 @@ public class ShortestRemainingTimeFirst {
     }
 
     static void findWaitingTime(Process proc[], int n,
-                                int wt[])
-    {
+                                int wt[]) {
         int rt[] = new int[n];
 
         for (int i = 0; i < n; i++)
@@ -52,8 +50,7 @@ public class ShortestRemainingTimeFirst {
 
         while (complete != n) {
 
-            for (int j = 0; j < n; j++)
-            {
+            for (int j = 0; j < n; j++) {
                 if ((proc[j].art <= t) &&
                         (rt[j] < minm) && rt[j] > 0) {
                     minm = rt[j];
@@ -63,7 +60,7 @@ public class ShortestRemainingTimeFirst {
             }
 
             if (!check) {
-                System.out.print("t=" +t + "\t");
+                System.out.print("t=" + t + "\t");
                 t++;
                 continue;
             }
@@ -75,9 +72,9 @@ public class ShortestRemainingTimeFirst {
                 minm = Integer.MAX_VALUE;
 
             if (rt[shortest] == 0) {
-                System.out.print("t=" +t + "\t");
+                System.out.print("t=" + t + "\t");
 
-                System.out.print("process "+shortest + "\t");
+                System.out.print("process " + shortest + "\t");
                 complete++;
                 check = false;
 
@@ -95,30 +92,24 @@ public class ShortestRemainingTimeFirst {
     }
 
     static void findTurnAroundTime(Process proc[], int n,
-                                   int wt[], int tat[])
-    {
+                                   int wt[], int tat[]) {
         for (int i = 0; i < n; i++)
             tat[i] = proc[i].bt + wt[i];
     }
 
-    static void findavgTime(Process proc[], int n)
-    {
+    static void findavgTime(Process proc[], int n) {
         int wt[] = new int[n], tat[] = new int[n];
-        int  total_wt = 0, total_tat = 0;
+        int total_wt = 0, total_tat = 0;
 
         findWaitingTime(proc, n, wt);
 
         findTurnAroundTime(proc, n, wt, tat);
 
-        // Display processes along with all
-        // details
         System.out.println("Processes " +
                 " Burst time " +
                 " Waiting time " +
                 " Turn around time");
 
-        // Calculate total waiting time and
-        // total turnaround time
         for (int i = 0; i < n; i++) {
             total_wt = total_wt + wt[i];
             total_tat = total_tat + tat[i];
@@ -126,8 +117,8 @@ public class ShortestRemainingTimeFirst {
         }
 
         System.out.println("Average waiting time = " +
-                (float)total_wt / (float)n);
+                (float) total_wt / (float) n);
         System.out.println("Average turn around time = " +
-                (float)total_tat / (float)n);
+                (float) total_tat / (float) n);
     }
 }
